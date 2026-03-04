@@ -32,7 +32,11 @@ export default function Register() {
             password,
         })
         if (error) {
-            setError(error.message)
+            let msg = error.message;
+            if (msg === 'User already registered') msg = 'Este correo ya está registrado.';
+            if (msg.includes('Password should be at least')) msg = 'La contraseña debe tener al menos 6 caracteres.';
+            if (msg.includes('Email rate limit exceeded')) msg = 'Límite de correos excedido, intenta nuevamente más tarde.';
+            setError(msg)
         } else {
             setSuccess(true)
         }

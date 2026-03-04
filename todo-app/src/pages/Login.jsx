@@ -30,7 +30,11 @@ export default function Login() {
             password,
         })
         if (error) {
-            setError(error.message)
+            let msg = error.message;
+            if (msg === 'Invalid login credentials') msg = 'Correo o contraseña incorrectos.';
+            if (msg === 'Email not confirmed') msg = 'Correo electrónico no confirmado.';
+            if (msg === 'User not found') msg = 'Usuario no encontrado.';
+            setError(msg)
         }
         setLoading(false)
     }
